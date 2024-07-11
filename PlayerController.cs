@@ -12,6 +12,8 @@ public class PlayerController_ : MonoBehaviour
     private bool goJump = false;
     public LayerMask groundLayer;
     private SpriteRenderer spriteRenderer;
+    private bool flipX;
+    private bool flipTurnX;
 
     private bool isMoving; 
     /*ここまで基本定義*/
@@ -22,6 +24,8 @@ public class PlayerController_ : MonoBehaviour
         isMoving = false;
         rbody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        flipX = priteRenderer.flipX;
+        flipTurnX = !flipX;
         /*ここまで基本初期化*/
     }
 
@@ -58,11 +62,11 @@ public class PlayerController_ : MonoBehaviour
     {
         if (axisH > 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = flipX;
         }
         else if (axisH < 0)
         {
-            spriteRenderer.flipX = false;
+            spriteRenderer.flipX = flipTurnX;
         }
 
         if (onGroundCheck() || axisH != 0)
